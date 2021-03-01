@@ -1,0 +1,31 @@
+
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend_sber
+      args:
+        DJANGO_ALLOWED_HOSTS: http://192.168.10.122
+#        DJANGO_SECRET_KEY: 5*1do^o(k@-nu7d9#c4e%y58dz$%f4o338tq0ub)c0tb@$&6$1
+#        DJANGO_CORS_ORIGIN_WHITELIST: 192.168.10.122
+    command: gunicorn backend_sber.wsgi --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+  frontend:
+    build:
+      context: ./frontend-react
+    volumes:
+      - build_folder:/frontend/build
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:8080
+    volumes:
+      - ./webserver/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+      - build_folder:/var/www/frontend
+    depends_on:
+      - backend
+      - frontend
+volumes:
+  build_folder:
