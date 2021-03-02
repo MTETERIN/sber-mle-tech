@@ -122,3 +122,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MODEL_PATH = str(BASE_DIR / 'models/okved_classifier')
+FEATURE_PATH = str(BASE_DIR / 'models/features.csv')

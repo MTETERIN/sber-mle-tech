@@ -1,10 +1,11 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.http import JsonResponse
 from rest_framework.reverse import reverse
 from rest_framework import views
 from .models import INN, Pay
 from .serializers import INNSerializer, PaySerializer
-
+from .services import okved_predict
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -26,7 +27,10 @@ class INNView(views.APIView):
         else:
             inn = INN.objects.all()[:limit]
         serializer = INNSerializer(inn, many=True)
-        return Response(serializer.data)
+        if serializer.data:
+            return Response(serializer.data)
+        else:
+            return JsonResponse({'error_desc': 'Данные не были найдены'}, status=404)
 
 
 class PayView(views.APIView):
@@ -43,10 +47,20 @@ class PayView(views.APIView):
             pays = pays.filter(hash_inn_dt=inn_receiver)
         pays = pays[:limit]
         serializer = PaySerializer(pays, many=True)
-        return Response(serializer.data)
+        if serializer.data:
+            return Response(serializer.data)
+        else:
+            return JsonResponse({'error_desc': 'Данные не были найдены'}, status=404)
 
 
 class OkvedPredictView(views.APIView):
 
     def get(self, request):
-        pass
+        try:
+            inn = request.GET.get('inn')
+            result = []
+            data = okved_predict(inn)
+            result.append(data)
+            return JsonResponse(result, safe=False)
+        except:
+            return JsonResponse({'error_desc': 'Something went wrong'}, status=429)

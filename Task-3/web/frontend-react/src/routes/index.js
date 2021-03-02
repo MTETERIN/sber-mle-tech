@@ -3,10 +3,9 @@ import { Redirect } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 
 // pages
-const INN = React.lazy(() => import('../pages/mdlp/INN'));
-const Pays = React.lazy(() => import('../pages/mdlp/Pays'));
-const Sgtin = React.lazy(() => import('../pages/mdlp/Sgtin'));
-const SgtinNotPaid = React.lazy(() => import('../pages/mdlp/SgtinNotPaid'));
+const INN = React.lazy(() => import('../pages/sber/INN'));
+const Pays = React.lazy(() => import('../pages/sber/Pays'));
+const Okved = React.lazy(() => import('../pages/sber/Okved'));
 
 // root routes
 const rootRoute = {
@@ -36,15 +35,9 @@ const pageRoutes = {
                 route: Route,
         },
         {
-                path: '/sber/sgtin',
+                path: '/sber/okved',
                 name: 'Прогноз по ИНН',
-                component: Sgtin,
-                route: Route,
-        },
-        {
-                path: '/sber/sgtin-not-paid',
-                name: 'Прогнозирование',
-                component: SgtinNotPaid,
+                component: Okved,
                 route: Route,
         },
     ]

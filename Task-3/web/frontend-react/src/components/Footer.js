@@ -9,7 +9,7 @@ const Footer = () => {
             <footer className="footer">
                 <div className="container-fluid">
                     <Row>
-                        <Col md={6}>{currentYear} © Сбер. Больше чем банк. </Col>
+                        <Col md={6}>{currentYear} © Сбер банк. Больше чем банк. </Col>
 
                     </Row>
                 </div>
