@@ -22,8 +22,8 @@
     "simplebar-react": "^2.2.0"
   },
   "scripts": {
-    "start": "REACT_APP_BACKEND_URL=\"http://192.168.1.103:8000/api/v1\" react-scripts start",
-    "build": "REACT_APP_BACKEND_URL=\"http://192.168.1.103:8000/api/v1\" react-scripts build",
+    "start": "REACT_APP_BACKEND_URL=\"http://192.168.10.122:8000/api/v1\" react-scripts start",
+    "build": "REACT_APP_BACKEND_URL=\"http://94.26.236.35:8000/api/v1\" react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "flow": "flow",
